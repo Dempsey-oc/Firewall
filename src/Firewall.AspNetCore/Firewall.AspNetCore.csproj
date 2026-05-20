@@ -3,10 +3,11 @@
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
     <RootNamespace>Firewall</RootNamespace>
-    <AssemblyName>Firewall</AssemblyName>
-    <PackageId>Firewall</PackageId>
-    <Description>Meta-package and v3 compatibility shim for the Firewall middleware. Transitively pulls in Firewall.AspNetCore. Existing v3 APIs (FirewallRulesEngine, CIDRNotation, UseFirewall(rule)) are kept as [Obsolete] shims that delegate to the new pipeline.</Description>
+    <AssemblyName>Firewall.AspNetCore</AssemblyName>
+    <PackageId>Firewall.AspNetCore</PackageId>
+    <Description>ASP.NET Core middleware and DI surface for the Firewall package. Provides AddFirewall(), UseFirewall() and IFirewallBuilder.</Description>
     <IsAotCompatible>true</IsAotCompatible>
+    <IsTrimmable>true</IsTrimmable>
   </PropertyGroup>
 
   <ItemGroup>
@@ -16,7 +17,12 @@
   <ItemGroup>
     <ProjectReference Include="..\Firewall.Abstractions\Firewall.Abstractions.csproj" />
     <ProjectReference Include="..\Firewall.Core\Firewall.Core.csproj" />
-    <ProjectReference Include="..\Firewall.AspNetCore\Firewall.AspNetCore.csproj" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="Firewall.AspNetCore.Tests" />
+    <InternalsVisibleTo Include="Firewall.IntegrationTests" />
   </ItemGroup>
 
 </Project>

@@ -2,6 +2,79 @@
 
 ASP.NET Core middleware for request filtering.
 
+> **v4 is a ground-up rewrite.** Async rule contract, multi-package layout,
+> options pattern, OpenTelemetry, HybridCache, YARP integration, AOT-friendly.
+> v3 APIs are kept as `[Obsolete]` shims — see
+> [`docs/migration-v3-to-v4.md`](docs/migration-v3-to-v4.md).
+
+## Quick start (v4)
+
+```csharp
+using Firewall;
+using Firewall.DependencyInjection;
+using Firewall.Providers.Cloudflare;
+using Firewall.Geo.MaxMind;
+
+var builder = WebApplication.CreateBuilder(args);
+
+builder.Services
+    .AddFirewall()
+    .BindConfiguration(builder.Configuration)
+    .AddCloudflareProvider()
+    .AddMaxMindGeo(o => o.DatabasePath = "/var/lib/geoip/GeoLite2-Country.mmdb")
+    .AddOpenTelemetry()
+    .AddHealthCheck();
+
+var app = builder.Build();
+app.UseForwardedHeaders();
+app.UseFirewall();
+app.Run();
+```
+
+```jsonc
+// appsettings.json
+{
+  "Firewall": {
+    "Rules": {
+      "DefaultDeny": true,
+      "AllowLocalhost": true,
+      "AllowedCidrs": [ "10.0.0.0/8" ],
+      "DeniedCountries": [ "KP" ]
+    },
+    "TrustedProxies": {
+      "KnownNetworks": [ "10.0.0.0/8" ],
+      "ForwardLimit": 2
+    }
+  }
+}
+```
+
+## Packages
+
+| NuGet | What it gives you |
+|---|---|
+| `Firewall.Abstractions` | Contracts only (`IFirewallRule`, `FirewallContext`, options). AOT-friendly. |
+| `Firewall.Core` | Engine + Patricia-trie CIDR matcher + built-in rules. |
+| `Firewall.AspNetCore` | Middleware + `AddFirewall()` DI builder. |
+| `Firewall` | Meta-package + v3 compatibility shims. |
+| `Firewall.Providers.Cloudflare` | Cloudflare IP-range background refresh. |
+| `Firewall.Geo.MaxMind` | External MaxMind `.mmdb` geo provider. |
+| `Firewall.OpenTelemetry` | `ActivitySource` and `Meter` instrumentation. |
+| `Firewall.HealthChecks` | `IHealthCheck` integration. |
+| `Firewall.Caching.Hybrid` | `HybridCache` decorator for geo lookups. |
+| `Firewall.Yarp` | YARP reverse-proxy transform. |
+
+## Why v4 exists
+
+See [`docs/adr/0001-multi-package-architecture.md`](docs/adr/0001-multi-package-architecture.md)
+and [`docs/adr/0002-async-rule-contract.md`](docs/adr/0002-async-rule-contract.md).
+
+## Security
+
+See [`docs/security/threat-model.md`](docs/security/threat-model.md).
+
+## Original v3 README
+
 Firewall adds IP address-, geo-location and custom filtering capabilities to an ASP.NET Core web application which gives control over which connections are allowed to access the web server.
 
 [![NuGet Info](https://buildstats.info/nuget/Firewall?includePreReleases=true)](https://www.nuget.org/packages/Firewall/)

@@ -2,10 +2,10 @@
 
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
-    <RootNamespace>Firewall</RootNamespace>
-    <AssemblyName>Firewall</AssemblyName>
-    <PackageId>Firewall</PackageId>
-    <Description>Meta-package and v3 compatibility shim for the Firewall middleware. Transitively pulls in Firewall.AspNetCore. Existing v3 APIs (FirewallRulesEngine, CIDRNotation, UseFirewall(rule)) are kept as [Obsolete] shims that delegate to the new pipeline.</Description>
+    <RootNamespace>Firewall.Providers.Cloudflare</RootNamespace>
+    <AssemblyName>Firewall.Providers.Cloudflare</AssemblyName>
+    <PackageId>Firewall.Providers.Cloudflare</PackageId>
+    <Description>Cloudflare IP range provider for the Firewall package. Refreshes ranges from https://www.cloudflare.com/ips-v{4,6} on a configurable schedule via IHttpClientFactory + Polly resilience.</Description>
     <IsAotCompatible>true</IsAotCompatible>
   </PropertyGroup>
 
@@ -17,6 +17,10 @@
     <ProjectReference Include="..\Firewall.Abstractions\Firewall.Abstractions.csproj" />
     <ProjectReference Include="..\Firewall.Core\Firewall.Core.csproj" />
     <ProjectReference Include="..\Firewall.AspNetCore\Firewall.AspNetCore.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Http.Resilience" />
   </ItemGroup>
 
 </Project>

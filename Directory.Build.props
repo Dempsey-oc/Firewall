@@ -1,0 +1,75 @@
+<Project>
+
+  <PropertyGroup Label="Identity">
+    <Product>Firewall</Product>
+    <Authors>Dustin Moris Gorski and contributors</Authors>
+    <Company>Firewall contributors</Company>
+    <Copyright>Copyright (c) 2020-$([System.DateTime]::UtcNow.Year) Dustin Moris Gorski and contributors</Copyright>
+    <NeutralLanguage>en-GB</NeutralLanguage>
+    <VersionPrefix>4.0.0</VersionPrefix>
+  </PropertyGroup>
+
+  <PropertyGroup Label="Compiler">
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <WarningsAsErrors />
+    <AnalysisLevel>latest-recommended</AnalysisLevel>
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);CS1591;NU5104;IL2026;IL3050;RS0016;RS0017;RS0036;RS0037;RS0041</NoWarn>
+  </PropertyGroup>
+
+  <PropertyGroup Label="Deterministic Build">
+    <Deterministic>true</Deterministic>
+    <ContinuousIntegrationBuild Condition="'$(CI)' == 'true' or '$(GITHUB_ACTIONS)' == 'true'">true</ContinuousIntegrationBuild>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <DebugType>portable</DebugType>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+  </PropertyGroup>
+
+  <PropertyGroup Label="Package Defaults" Condition="'$(IsPackable)' != 'false'">
+    <IsPackable>true</IsPackable>
+    <PackageProjectUrl>https://github.com/dempsey-oc/firewall</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/dempsey-oc/firewall</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageIcon>firewall.png</PackageIcon>
+    <PackageReleaseNotes>https://raw.githubusercontent.com/dempsey-oc/firewall/master/RELEASE_NOTES.md</PackageReleaseNotes>
+    <PackageTags>firewall;ip;cidr;geoip;cloudflare;ratelimit;security;middleware;aspnetcore</PackageTags>
+    <EnablePackageValidation>true</EnablePackageValidation>
+    <PackageValidationBaselineVersion Condition="'$(PackageValidationBaselineVersion)' == ''"></PackageValidationBaselineVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Label="Test and Sample Defaults" Condition="'$(IsTestProject)' == 'true' or '$(IsSampleProject)' == 'true' or '$(IsBenchmarkProject)' == 'true'">
+    <IsPackable>false</IsPackable>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);CA1707;CA2007;CA1062;CA1303;CA1812;CA1822;CA1861;CA1859;xUnit1004</NoWarn>
+  </PropertyGroup>
+
+  <PropertyGroup Label="Public API surface tracking" Condition="'$(IsPackable)' == 'true'">
+    <PublicApiAnalyzerSourceItemType>AdditionalFiles</PublicApiAnalyzerSourceItemType>
+  </PropertyGroup>
+
+  <ItemGroup Condition="'$(IsPackable)' == 'true'">
+    <None Include="$(MSBuildThisFileDirectory)assets\firewall.png" Pack="true" PackagePath="\" Visible="false" />
+    <None Include="$(MSBuildProjectDirectory)\README.md" Pack="true" PackagePath="\" Condition="Exists('$(MSBuildProjectDirectory)\README.md')" />
+    <None Include="$(MSBuildThisFileDirectory)README.md" Pack="true" PackagePath="\" Condition="!Exists('$(MSBuildProjectDirectory)\README.md')" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(IsPackable)' == 'true'">
+    <PackageReference Include="Microsoft.SourceLink.GitHub" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.CodeAnalysis.PublicApiAnalyzers" PrivateAssets="All" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(IsPackable)' == 'true' and Exists('$(MSBuildProjectDirectory)\PublicAPI.Shipped.txt')">
+    <AdditionalFiles Include="PublicAPI.Shipped.txt" />
+    <AdditionalFiles Include="PublicAPI.Unshipped.txt" />
+  </ItemGroup>
+
+</Project>

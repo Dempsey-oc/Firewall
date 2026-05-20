@@ -1,28 +1,31 @@
-﻿using Microsoft.AspNetCore;
-using Microsoft.AspNetCore.Hosting;
-using Serilog;
+using Firewall;
+using Firewall.DependencyInjection;
+using Firewall.HealthChecks;
+using Firewall.OpenTelemetry;
+using Firewall.Providers.Cloudflare;
+using Microsoft.AspNetCore.HttpOverrides;
 
-namespace BasicApp
+var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.Configure<ForwardedHeadersOptions>(o =>
 {
-    public static class Program
-    {
-        public static void Main(string[] args) =>
-            RunWebServer(args);
+    o.ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
+    o.ForwardLimit = 2;
+});
 
-        private static void RunWebServer(string[] args)
-        {
-            Log.Logger =
-                new LoggerConfiguration()
-                    .MinimumLevel.Debug()
-                    .WriteTo.Console()
-                    .CreateLogger();
+builder.Services
+    .AddFirewall()
+    .BindConfiguration(builder.Configuration)
+    .AddCloudflareProvider()
+    .AddOpenTelemetry()
+    .AddHealthCheck();
 
-            WebHost
-                .CreateDefaultBuilder(args)
-                .UseSerilog()
-                .UseStartup<Startup>()
-                .Build()
-                .Run();
-        }
-    }
-}
+var app = builder.Build();
+
+app.UseForwardedHeaders();
+app.UseFirewall();
+
+app.MapHealthChecks("/healthz");
+app.MapGet("/", () => "Hello from a properly firewalled v4 endpoint.");
+
+app.Run();

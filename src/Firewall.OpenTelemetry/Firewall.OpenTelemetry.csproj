@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <RootNamespace>Firewall.OpenTelemetry</RootNamespace>
+    <AssemblyName>Firewall.OpenTelemetry</AssemblyName>
+    <PackageId>Firewall.OpenTelemetry</PackageId>
+    <Description>OpenTelemetry instrumentation for the Firewall package: emits Activity sources and Meter instruments for rule evaluation and provider refreshes.</Description>
+    <IsAotCompatible>true</IsAotCompatible>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Firewall.Abstractions\Firewall.Abstractions.csproj" />
+    <ProjectReference Include="..\Firewall.AspNetCore\Firewall.AspNetCore.csproj" />
+  </ItemGroup>
+
+</Project>

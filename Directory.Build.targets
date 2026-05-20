@@ -1,0 +1,7 @@
+<Project>
+
+  <PropertyGroup Condition="'$(IsTestProject)' == 'true' or '$(IsSampleProject)' == 'true' or '$(IsBenchmarkProject)' == 'true'">
+    <NoWarn>$(NoWarn);CA1707;CA2007;CA1062;CA1303;CA1812;CA1822;CA1861;CA1859;CA1816;CA1849;CA1873;CA1848;CA2249;xUnit1004</NoWarn>
+  </PropertyGroup>
+
+</Project>

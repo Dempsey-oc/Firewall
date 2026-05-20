@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <RootNamespace>Firewall.Geo.MaxMind</RootNamespace>
+    <AssemblyName>Firewall.Geo.MaxMind</AssemblyName>
+    <PackageId>Firewall.Geo.MaxMind</PackageId>
+    <Description>MaxMind GeoIP2 geolocation provider for the Firewall package. The MaxMind .mmdb database is loaded from disk (NOT embedded) so it can be updated out-of-band.</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Firewall.Abstractions\Firewall.Abstractions.csproj" />
+    <ProjectReference Include="..\Firewall.AspNetCore\Firewall.AspNetCore.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MaxMind.GeoIP2" />
+  </ItemGroup>
+
+</Project>
