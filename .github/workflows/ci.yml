@@ -127,7 +127,7 @@ jobs:
       - name: native-aot publish (abstractions+core)
         run: |
           for proj in src/Firewall.Abstractions src/Firewall.Core; do
-            dotnet publish $proj -c Release -r linux-x64 \
+            dotnet publish $proj -c Release -f net10.0 -r linux-x64 \
               -p:PublishAot=true \
               -p:IsAotCompatible=true \
               -p:TrimMode=full \
