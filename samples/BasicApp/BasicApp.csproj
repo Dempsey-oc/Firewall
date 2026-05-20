@@ -1,20 +1,18 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net10.0</TargetFramework>
+    <IsPackable>false</IsPackable>
+    <IsSampleProject>true</IsSampleProject>
+    <Nullable>enable</Nullable>
+    <RootNamespace>BasicApp</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Serilog.AspNetCore" Version="3.0.*" />
-    <PackageReference Include="Serilog.Sinks.Console" Version="3.1.*" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="../../src/Firewall/Firewall.csproj" />
+    <ProjectReference Include="..\..\src\Firewall.AspNetCore\Firewall.AspNetCore.csproj" />
+    <ProjectReference Include="..\..\src\Firewall.Providers.Cloudflare\Firewall.Providers.Cloudflare.csproj" />
+    <ProjectReference Include="..\..\src\Firewall.OpenTelemetry\Firewall.OpenTelemetry.csproj" />
+    <ProjectReference Include="..\..\src\Firewall.HealthChecks\Firewall.HealthChecks.csproj" />
   </ItemGroup>
 
 </Project>

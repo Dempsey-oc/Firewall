@@ -2,10 +2,10 @@
 
   <PropertyGroup>
     <TargetFrameworks>net8.0;net10.0</TargetFrameworks>
-    <RootNamespace>Firewall</RootNamespace>
-    <AssemblyName>Firewall</AssemblyName>
-    <PackageId>Firewall</PackageId>
-    <Description>Meta-package and v3 compatibility shim for the Firewall middleware. Transitively pulls in Firewall.AspNetCore. Existing v3 APIs (FirewallRulesEngine, CIDRNotation, UseFirewall(rule)) are kept as [Obsolete] shims that delegate to the new pipeline.</Description>
+    <RootNamespace>Firewall.HealthChecks</RootNamespace>
+    <AssemblyName>Firewall.HealthChecks</AssemblyName>
+    <PackageId>Firewall.HealthChecks</PackageId>
+    <Description>ASP.NET Core health check integration for the Firewall package. Reports degraded if a provider's snapshot is stale or empty.</Description>
     <IsAotCompatible>true</IsAotCompatible>
   </PropertyGroup>
 
@@ -15,7 +15,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Firewall.Abstractions\Firewall.Abstractions.csproj" />
-    <ProjectReference Include="..\Firewall.Core\Firewall.Core.csproj" />
     <ProjectReference Include="..\Firewall.AspNetCore\Firewall.AspNetCore.csproj" />
   </ItemGroup>
 

@@ -1,0 +1,35 @@
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+indent_style = space
+indent_size = 4
+
+[*.{json,yml,yaml,csproj,props,targets}]
+indent_size = 2
+
+[*.cs]
+dotnet_diagnostic.IDE0005.severity = silent
+dotnet_diagnostic.CA1062.severity = none
+dotnet_diagnostic.CA1303.severity = none
+dotnet_diagnostic.CA1707.severity = none
+dotnet_diagnostic.CA2007.severity = none
+
+# Public API analyzers — warn (not error) to allow incremental tracking; CI enforces a separate gate.
+dotnet_diagnostic.RS0016.severity = warning
+dotnet_diagnostic.RS0017.severity = warning
+dotnet_diagnostic.RS0036.severity = warning
+dotnet_diagnostic.RS0037.severity = warning
+dotnet_diagnostic.RS0041.severity = warning
+
+# Don't fight stylistic choices that don't add safety.
+dotnet_diagnostic.CA1822.severity = silent
+dotnet_diagnostic.CA1873.severity = silent
+
+csharp_using_directive_placement = outside_namespace:warning
+csharp_style_namespace_declarations = file_scoped:warning
+csharp_style_expression_bodied_methods = when_on_single_line:silent
+dotnet_sort_system_directives_first = true
