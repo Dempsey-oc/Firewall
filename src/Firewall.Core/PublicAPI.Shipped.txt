@@ -1,1 +1,108 @@
 #nullable enable
+Firewall.Configuration.FirewallOptionsBinder
+Firewall.Configuration.FirewallOptionsBinder.BuildRules() -> System.Collections.Generic.IReadOnlyList<Firewall.IFirewallRule!>!
+Firewall.Configuration.FirewallOptionsBinder.FirewallOptionsBinder(Microsoft.Extensions.Options.IOptions<Firewall.FirewallOptions!>! options, System.Collections.Generic.IEnumerable<Firewall.Providers.IIpRangeProvider!>! rangeProviders, Microsoft.Extensions.Logging.ILogger<Firewall.Configuration.FirewallOptionsBinder!>! logger, Firewall.Providers.IGeoProvider? geo = null) -> void
+Firewall.Configuration.FirewallOptionsValidator
+Firewall.Configuration.FirewallOptionsValidator.FirewallOptionsValidator() -> void
+Firewall.Configuration.FirewallOptionsValidator.Validate(string? name, Firewall.FirewallOptions! options) -> Microsoft.Extensions.Options.ValidateOptionsResult!
+Firewall.Networking.Cidr
+Firewall.Networking.Cidr.Address.get -> System.Net.IPAddress!
+Firewall.Networking.Cidr.Contains(System.Net.IPAddress! address) -> bool
+Firewall.Networking.Cidr.Equals(Firewall.Networking.Cidr? other) -> bool
+Firewall.Networking.Cidr.IsIPv4.get -> bool
+Firewall.Networking.Cidr.PrefixLength.get -> int
+Firewall.Networking.CidrTrie
+Firewall.Networking.CidrTrie.Add(Firewall.Networking.Cidr! cidr) -> void
+Firewall.Networking.CidrTrie.AddRange(System.Collections.Generic.IEnumerable<Firewall.Networking.Cidr!>! cidrs) -> void
+Firewall.Networking.CidrTrie.Build() -> void
+Firewall.Networking.CidrTrie.CidrTrie() -> void
+Firewall.Networking.CidrTrie.Contains(System.Net.IPAddress! address) -> bool
+Firewall.Networking.CidrTrie.Count.get -> int
+Firewall.Networking.ForwardedHeaderResolver
+Firewall.Networking.ForwardedHeaderResolver.ForwardedHeaderResolver(System.Collections.Generic.IEnumerable<System.Net.IPAddress!>! knownProxies, System.Collections.Generic.IEnumerable<Firewall.Networking.Cidr!>! knownNetworks, int forwardLimit) -> void
+Firewall.Networking.ForwardedHeaderResolver.Resolve(System.Net.IPAddress! peerAddress, string? forwardedFor) -> System.Net.IPAddress!
+Firewall.Pipeline.FirewallPipeline
+Firewall.Pipeline.FirewallPipeline.Count.get -> int
+Firewall.Pipeline.FirewallPipeline.EvaluateAsync(Firewall.FirewallContext context, System.Threading.CancellationToken cancellationToken) -> System.Threading.Tasks.ValueTask<Firewall.Pipeline.PipelineResult>
+Firewall.Pipeline.FirewallPipeline.FirewallPipeline(System.Collections.Generic.IEnumerable<Firewall.IFirewallRule!>! rules, Firewall.Diagnostics.IFirewallTelemetry? telemetry = null) -> void
+Firewall.Pipeline.FirewallPipeline.Rules.get -> System.Collections.Immutable.ImmutableArray<Firewall.IFirewallRule!>
+Firewall.Pipeline.FirewallPipelineBuilder
+Firewall.Pipeline.FirewallPipelineBuilder.Add(Firewall.IFirewallRule! rule) -> Firewall.Pipeline.FirewallPipelineBuilder!
+Firewall.Pipeline.FirewallPipelineBuilder.Build() -> Firewall.Pipeline.FirewallPipeline!
+Firewall.Pipeline.FirewallPipelineBuilder.FirewallPipelineBuilder() -> void
+Firewall.Pipeline.FirewallPipelineBuilder.Rules.get -> System.Collections.Generic.IReadOnlyList<Firewall.IFirewallRule!>!
+Firewall.Pipeline.FirewallPipelineBuilder.WithTelemetry(Firewall.Diagnostics.IFirewallTelemetry! telemetry) -> Firewall.Pipeline.FirewallPipelineBuilder!
+Firewall.Pipeline.FirewallRuleException
+Firewall.Pipeline.FirewallRuleException.FirewallRuleException(string! ruleName, System.Exception! inner) -> void
+Firewall.Pipeline.FirewallRuleException.RuleName.get -> string!
+Firewall.Pipeline.PipelineResult
+Firewall.Pipeline.PipelineResult.Deconstruct(out Firewall.IFirewallRule? MatchedRule, out Firewall.RuleEvaluation Evaluation) -> void
+Firewall.Pipeline.PipelineResult.Equals(Firewall.Pipeline.PipelineResult other) -> bool
+Firewall.Pipeline.PipelineResult.Evaluation.get -> Firewall.RuleEvaluation
+Firewall.Pipeline.PipelineResult.Evaluation.init -> void
+Firewall.Pipeline.PipelineResult.MatchedRule.get -> Firewall.IFirewallRule?
+Firewall.Pipeline.PipelineResult.MatchedRule.init -> void
+Firewall.Pipeline.PipelineResult.PipelineResult() -> void
+Firewall.Pipeline.PipelineResult.PipelineResult(Firewall.IFirewallRule? MatchedRule, Firewall.RuleEvaluation Evaluation) -> void
+Firewall.Rules.CidrAllowRule
+Firewall.Rules.CidrAllowRule.CidrAllowRule(System.Collections.Generic.IEnumerable<Firewall.Networking.Cidr!>! allowedRanges, string! name = "CidrAllow", int order = 200) -> void
+Firewall.Rules.CidrAllowRule.EvaluateAsync(Firewall.FirewallContext context, System.Threading.CancellationToken cancellationToken) -> System.Threading.Tasks.ValueTask<Firewall.RuleEvaluation>
+Firewall.Rules.CidrAllowRule.Name.get -> string!
+Firewall.Rules.CidrAllowRule.Order.get -> int
+Firewall.Rules.CidrDenyRule
+Firewall.Rules.CidrDenyRule.CidrDenyRule(System.Collections.Generic.IEnumerable<Firewall.Networking.Cidr!>! deniedRanges, string! name = "CidrDeny", int order = 20) -> void
+Firewall.Rules.CidrDenyRule.EvaluateAsync(Firewall.FirewallContext context, System.Threading.CancellationToken cancellationToken) -> System.Threading.Tasks.ValueTask<Firewall.RuleEvaluation>
+Firewall.Rules.CidrDenyRule.Name.get -> string!
+Firewall.Rules.CidrDenyRule.Order.get -> int
+Firewall.Rules.CountryAllowRule
+Firewall.Rules.CountryAllowRule.CountryAllowRule(Firewall.Providers.IGeoProvider! geo, System.Collections.Generic.IEnumerable<string!>! countryCodes, string! name = "CountryAllow", int order = 5000) -> void
+Firewall.Rules.CountryAllowRule.EvaluateAsync(Firewall.FirewallContext context, System.Threading.CancellationToken cancellationToken) -> System.Threading.Tasks.ValueTask<Firewall.RuleEvaluation>
+Firewall.Rules.CountryAllowRule.Name.get -> string!
+Firewall.Rules.CountryAllowRule.Order.get -> int
+Firewall.Rules.CountryDenyRule
+Firewall.Rules.CountryDenyRule.CountryDenyRule(Firewall.Providers.IGeoProvider! geo, System.Collections.Generic.IEnumerable<string!>! countryCodes, string! name = "CountryDeny", int order = 4000) -> void
+Firewall.Rules.CountryDenyRule.EvaluateAsync(Firewall.FirewallContext context, System.Threading.CancellationToken cancellationToken) -> System.Threading.Tasks.ValueTask<Firewall.RuleEvaluation>
+Firewall.Rules.CountryDenyRule.Name.get -> string!
+Firewall.Rules.CountryDenyRule.Order.get -> int
+Firewall.Rules.CustomRule
+Firewall.Rules.CustomRule.CustomRule(System.Func<Firewall.FirewallContext, System.Threading.CancellationToken, System.Threading.Tasks.ValueTask<Firewall.RuleEvaluation>>! evaluator, string! name, int order = 5000) -> void
+Firewall.Rules.CustomRule.EvaluateAsync(Firewall.FirewallContext context, System.Threading.CancellationToken cancellationToken) -> System.Threading.Tasks.ValueTask<Firewall.RuleEvaluation>
+Firewall.Rules.CustomRule.Name.get -> string!
+Firewall.Rules.CustomRule.Order.get -> int
+Firewall.Rules.DefaultDenyRule
+Firewall.Rules.DefaultDenyRule.EvaluateAsync(Firewall.FirewallContext context, System.Threading.CancellationToken cancellationToken) -> System.Threading.Tasks.ValueTask<Firewall.RuleEvaluation>
+Firewall.Rules.DefaultDenyRule.Name.get -> string!
+Firewall.Rules.DefaultDenyRule.Order.get -> int
+Firewall.Rules.IpAllowRule
+Firewall.Rules.IpAllowRule.EvaluateAsync(Firewall.FirewallContext context, System.Threading.CancellationToken cancellationToken) -> System.Threading.Tasks.ValueTask<Firewall.RuleEvaluation>
+Firewall.Rules.IpAllowRule.IpAllowRule(System.Collections.Generic.IEnumerable<System.Net.IPAddress!>! allowed, string! name = "IpAllow", int order = 100) -> void
+Firewall.Rules.IpAllowRule.Name.get -> string!
+Firewall.Rules.IpAllowRule.Order.get -> int
+Firewall.Rules.IpDenyRule
+Firewall.Rules.IpDenyRule.EvaluateAsync(Firewall.FirewallContext context, System.Threading.CancellationToken cancellationToken) -> System.Threading.Tasks.ValueTask<Firewall.RuleEvaluation>
+Firewall.Rules.IpDenyRule.IpDenyRule(System.Collections.Generic.IEnumerable<System.Net.IPAddress!>! denied, string! name = "IpDeny", int order = 10) -> void
+Firewall.Rules.IpDenyRule.Name.get -> string!
+Firewall.Rules.IpDenyRule.Order.get -> int
+Firewall.Rules.IpRangeProviderRule
+Firewall.Rules.IpRangeProviderRule.EvaluateAsync(Firewall.FirewallContext context, System.Threading.CancellationToken cancellationToken) -> System.Threading.Tasks.ValueTask<Firewall.RuleEvaluation>
+Firewall.Rules.IpRangeProviderRule.IpRangeProviderRule(Firewall.Providers.IIpRangeProvider! provider, int order = 300) -> void
+Firewall.Rules.IpRangeProviderRule.Name.get -> string!
+Firewall.Rules.IpRangeProviderRule.Order.get -> int
+Firewall.Rules.LocalhostAllowRule
+Firewall.Rules.LocalhostAllowRule.EvaluateAsync(Firewall.FirewallContext context, System.Threading.CancellationToken cancellationToken) -> System.Threading.Tasks.ValueTask<Firewall.RuleEvaluation>
+Firewall.Rules.LocalhostAllowRule.Name.get -> string!
+Firewall.Rules.LocalhostAllowRule.Order.get -> int
+override Firewall.Networking.Cidr.Equals(object? obj) -> bool
+override Firewall.Networking.Cidr.GetHashCode() -> int
+override Firewall.Networking.Cidr.ToString() -> string!
+override Firewall.Pipeline.PipelineResult.GetHashCode() -> int
+static Firewall.Networking.Cidr.Parse(string! cidr) -> Firewall.Networking.Cidr!
+static Firewall.Networking.Cidr.TryParse(string? cidr, out Firewall.Networking.Cidr! result) -> bool
+static Firewall.Networking.Cidr.operator !=(Firewall.Networking.Cidr? left, Firewall.Networking.Cidr? right) -> bool
+static Firewall.Networking.Cidr.operator ==(Firewall.Networking.Cidr? left, Firewall.Networking.Cidr? right) -> bool
+static Firewall.Pipeline.PipelineResult.operator !=(Firewall.Pipeline.PipelineResult left, Firewall.Pipeline.PipelineResult right) -> bool
+static Firewall.Pipeline.PipelineResult.operator ==(Firewall.Pipeline.PipelineResult left, Firewall.Pipeline.PipelineResult right) -> bool
+static Firewall.Rules.DefaultDenyRule.Instance.get -> Firewall.IFirewallRule!
+static Firewall.Rules.LocalhostAllowRule.Instance.get -> Firewall.IFirewallRule!
+~override Firewall.Pipeline.PipelineResult.Equals(object obj) -> bool
+~override Firewall.Pipeline.PipelineResult.ToString() -> string

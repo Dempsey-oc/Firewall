@@ -1,0 +1,7 @@
+#nullable enable
+Firewall.Caching.CachingGeoProviderDecorator
+Firewall.Caching.CachingGeoProviderDecorator.CachingGeoProviderDecorator(Firewall.Providers.IGeoProvider! inner, Microsoft.Extensions.Caching.Hybrid.HybridCache! cache, Microsoft.Extensions.Caching.Hybrid.HybridCacheEntryOptions? entryOptions = null) -> void
+Firewall.Caching.CachingGeoProviderDecorator.GetCountryCodeAsync(System.Net.IPAddress! address, System.Threading.CancellationToken cancellationToken) -> System.Threading.Tasks.ValueTask<string?>
+Firewall.Caching.CachingGeoProviderDecorator.Name.get -> string!
+Firewall.Caching.HybridCacheBuilderExtensions
+static Firewall.Caching.HybridCacheBuilderExtensions.AddHybridCache(this Firewall.DependencyInjection.IFirewallBuilder! builder) -> Firewall.DependencyInjection.IFirewallBuilder!

@@ -18,7 +18,7 @@
     <AnalysisLevel>latest-recommended</AnalysisLevel>
     <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <NoWarn>$(NoWarn);CS1591;NU5104;IL2026;IL3050;RS0016;RS0017;RS0036;RS0037;RS0041</NoWarn>
+    <NoWarn>$(NoWarn);CS1591;NU5104;IL2026;IL3050</NoWarn>
   </PropertyGroup>
 
   <PropertyGroup Label="Deterministic Build">

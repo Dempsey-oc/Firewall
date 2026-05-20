@@ -1,0 +1,6 @@
+#nullable enable
+Firewall.HealthChecks.FirewallHealthCheck
+Firewall.HealthChecks.FirewallHealthCheck.CheckHealthAsync(Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckContext! context, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckResult>!
+Firewall.HealthChecks.FirewallHealthCheck.FirewallHealthCheck(Firewall.Pipeline.FirewallPipeline! pipeline, System.Collections.Generic.IEnumerable<Firewall.Providers.IIpRangeProvider!>! providers, Microsoft.Extensions.Options.IOptionsMonitor<Firewall.FirewallOptions!>! options) -> void
+Firewall.HealthChecks.FirewallHealthCheckBuilderExtensions
+static Firewall.HealthChecks.FirewallHealthCheckBuilderExtensions.AddHealthCheck(this Firewall.DependencyInjection.IFirewallBuilder! builder, string! name = "firewall", Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus failureStatus = Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus.Degraded, System.Collections.Generic.IEnumerable<string!>? tags = null) -> Firewall.DependencyInjection.IFirewallBuilder!
