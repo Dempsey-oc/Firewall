@@ -103,11 +103,7 @@ public sealed class CloudflareIpRangeProvider : IIpRangeProvider, IDisposable
 
     private static async Task<(IReadOnlyList<IPAddress>, IReadOnlyList<string>)> FetchAsync(HttpClient client, string url, CancellationToken ct)
     {
-#if NET8_0_OR_GREATER
         var text = await client.GetStringAsync(url, ct).ConfigureAwait(false);
-#else
-        var text = await client.GetStringAsync(url).ConfigureAwait(false);
-#endif
         var ips = new List<IPAddress>();
         var cidrs = new List<string>();
         foreach (var raw in text.Split('\n'))

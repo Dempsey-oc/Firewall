@@ -40,8 +40,7 @@ the new async, options-driven, DI-first API.
 
 ### Changed
 
-- Minimum framework is now **net8.0** (previously net5.0, EOL since 2022).
-- Default ships against both **net8.0** (LTS) and **net10.0**.
+- Minimum framework is now **net10.0** (previously net5.0, EOL since 2022).
 - `IFirewallRule.IsAllowed(HttpContext)` is now an `[Obsolete]` extension method
   delegating to the async `EvaluateAsync` API.
 

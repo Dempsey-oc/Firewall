@@ -69,13 +69,9 @@ public sealed class CidrTrie
         ArgumentNullException.ThrowIfNull(address);
         if (address.IsIPv4MappedToIPv6) address = address.MapToIPv4();
 
-#if NET8_0_OR_GREATER
         Span<byte> buf = stackalloc byte[16];
         if (!address.TryWriteBytes(buf, out var written)) return false;
         var bytes = buf[..written];
-#else
-        var bytes = (ReadOnlySpan<byte>)address.GetAddressBytes();
-#endif
 
         var root = address.AddressFamily == AddressFamily.InterNetwork ? _v4Root : _v6Root;
         var node = root;

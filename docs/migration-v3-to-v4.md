@@ -95,7 +95,7 @@ because:
 3. **`IFirewallRule.IsAllowed(HttpContext)` is now an `[Obsolete]` extension**
    that adapts to the async API. Custom rules must implement the new contract.
 
-4. **net5.0 is no longer supported**. The package targets `net8.0` and `net10.0`.
+4. **net5.0 is no longer supported**. The package targets `net10.0`.
 
 ## What's new
 

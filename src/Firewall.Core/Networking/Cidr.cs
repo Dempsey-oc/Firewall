@@ -54,13 +54,8 @@ public sealed class Cidr : IEquatable<Cidr>
         var slash = cidr.IndexOf('/');
         if (slash < 0) return false;
 
-#if NET8_0_OR_GREATER
         var addressPart = cidr.AsSpan(0, slash);
         var prefixPart = cidr.AsSpan(slash + 1);
-#else
-        var addressPart = cidr.Substring(0, slash);
-        var prefixPart = cidr.Substring(slash + 1);
-#endif
 
         if (!IPAddress.TryParse(addressPart, out var address)) return false;
         if (!int.TryParse(prefixPart, System.Globalization.NumberStyles.Integer, System.Globalization.CultureInfo.InvariantCulture, out var prefix)) return false;
@@ -74,11 +69,7 @@ public sealed class Cidr : IEquatable<Cidr>
         var bytes = address.GetAddressBytes();
         ApplyMask(bytes, prefix);
 
-#if NET8_0_OR_GREATER
         var normalised = new IPAddress(bytes);
-#else
-        var normalised = new IPAddress(bytes);
-#endif
 
         result = new Cidr(normalised, prefix, bytes, isIPv4);
         return true;
@@ -93,14 +84,9 @@ public sealed class Cidr : IEquatable<Cidr>
         var queryIsIPv4 = address.AddressFamily == AddressFamily.InterNetwork;
         if (queryIsIPv4 != IsIPv4) return false;
 
-#if NET8_0_OR_GREATER
         Span<byte> buf = stackalloc byte[16];
         if (!address.TryWriteBytes(buf, out var written)) return false;
         return ContainsCore(buf[..written]);
-#else
-        var bytes = address.GetAddressBytes();
-        return ContainsCore(bytes);
-#endif
     }
 
     internal bool ContainsCore(ReadOnlySpan<byte> addressBytes)
