@@ -2,9 +2,9 @@ name: ci
 
 on:
   push:
-    branches: [ master, main ]
+    branches: [ master, main, dev ]
   pull_request:
-    branches: [ master, main ]
+    branches: [ master, main, dev ]
   workflow_dispatch:
 
 permissions:
@@ -42,7 +42,7 @@ jobs:
         run: dotnet build Firewall.sln -c Release --no-restore -p:ContinuousIntegrationBuild=true
 
       - name: test (with coverage)
-        run: dotnet test Firewall.sln -c Release --no-build --logger "trx" --collect:"XPlat Code Coverage" --results-directory artifacts/test
+        run: dotnet test Firewall.sln -c Release --no-build --logger "trx" --collect:"XPlat Code Coverage" --results-directory artifacts/test --settings coverlet.runsettings
 
       - name: upload test results
         if: always()
@@ -50,6 +50,35 @@ jobs:
         with:
           name: test-results-${{ matrix.os }}
           path: artifacts/test/
+
+      - name: install reportgenerator
+        if: matrix.os == 'ubuntu-latest'
+        run: dotnet tool install -g dotnet-reportgenerator-globaltool
+
+      - name: enforce coverage gate (>=85% line coverage on src/)
+        if: matrix.os == 'ubuntu-latest'
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.dotnet/tools:$PATH"
+          reportgenerator \
+            -reports:'artifacts/test/**/coverage.cobertura.xml' \
+            -targetdir:artifacts/coverage \
+            -reporttypes:'Cobertura;TextSummary;MarkdownSummaryGithub' \
+            -assemblyfilters:'+Firewall*;-*.Tests;-Firewall.Benchmarks;-BasicApp'
+          echo '## Coverage' >> "$GITHUB_STEP_SUMMARY"
+          cat artifacts/coverage/SummaryGithub.md >> "$GITHUB_STEP_SUMMARY"
+          line=$(grep -oP 'line-rate="\K[0-9.]+' artifacts/coverage/Cobertura.xml | head -1)
+          pct=$(awk -v r="$line" 'BEGIN{printf "%.2f", r*100}')
+          echo "Total line coverage: ${pct}%"
+          awk -v p="$pct" 'BEGIN{ if (p+0 < 85.0) { print "FAIL: line coverage " p "% < 85%"; exit 1 } else { print "OK: line coverage " p "% >= 85%" } }'
+
+      - name: upload coverage report
+        if: matrix.os == 'ubuntu-latest' && always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: artifacts/coverage/
 
   pack:
     name: pack
