@@ -70,6 +70,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Firewall.Benchmarks", "benc
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Firewall.Providers.Cloudflare.Tests", "tests\Firewall.Providers.Cloudflare.Tests\Firewall.Providers.Cloudflare.Tests.csproj", "{DDAE4FF7-D4BA-414D-A7E9-D08FF40C5C09}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Firewall.Geo.MaxMind.Tests", "tests\Firewall.Geo.MaxMind.Tests\Firewall.Geo.MaxMind.Tests.csproj", "{8B552F18-F386-4502-9067-70915347C4B4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -260,6 +262,18 @@ Global
 		{DDAE4FF7-D4BA-414D-A7E9-D08FF40C5C09}.Release|x64.Build.0 = Release|Any CPU
 		{DDAE4FF7-D4BA-414D-A7E9-D08FF40C5C09}.Release|x86.ActiveCfg = Release|Any CPU
 		{DDAE4FF7-D4BA-414D-A7E9-D08FF40C5C09}.Release|x86.Build.0 = Release|Any CPU
+		{8B552F18-F386-4502-9067-70915347C4B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B552F18-F386-4502-9067-70915347C4B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B552F18-F386-4502-9067-70915347C4B4}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{8B552F18-F386-4502-9067-70915347C4B4}.Debug|x64.Build.0 = Debug|Any CPU
+		{8B552F18-F386-4502-9067-70915347C4B4}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{8B552F18-F386-4502-9067-70915347C4B4}.Debug|x86.Build.0 = Debug|Any CPU
+		{8B552F18-F386-4502-9067-70915347C4B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B552F18-F386-4502-9067-70915347C4B4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B552F18-F386-4502-9067-70915347C4B4}.Release|x64.ActiveCfg = Release|Any CPU
+		{8B552F18-F386-4502-9067-70915347C4B4}.Release|x64.Build.0 = Release|Any CPU
+		{8B552F18-F386-4502-9067-70915347C4B4}.Release|x86.ActiveCfg = Release|Any CPU
+		{8B552F18-F386-4502-9067-70915347C4B4}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -280,5 +294,6 @@ Global
 		{303F7C2B-FAC7-4E17-B364-2BE65C89028C} = {47752935-1BAE-4F98-BE10-B0CD9BEAF86D}
 		{A8CB2FDD-67A3-42F8-986A-7AE87182DFA5} = {760AB15A-8938-8D9B-BEDE-5CE1484B84C3}
 		{DDAE4FF7-D4BA-414D-A7E9-D08FF40C5C09} = {47752935-1BAE-4F98-BE10-B0CD9BEAF86D}
+		{8B552F18-F386-4502-9067-70915347C4B4} = {47752935-1BAE-4F98-BE10-B0CD9BEAF86D}
 	EndGlobalSection
 EndGlobal
