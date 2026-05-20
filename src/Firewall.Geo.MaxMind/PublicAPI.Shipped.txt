@@ -1,0 +1,15 @@
+#nullable enable
+Firewall.Geo.MaxMind.MaxMindBuilderExtensions
+Firewall.Geo.MaxMind.MaxMindGeoOptions
+Firewall.Geo.MaxMind.MaxMindGeoOptions.CacheSize.get -> int
+Firewall.Geo.MaxMind.MaxMindGeoOptions.CacheSize.set -> void
+Firewall.Geo.MaxMind.MaxMindGeoOptions.DatabasePath.get -> string!
+Firewall.Geo.MaxMind.MaxMindGeoOptions.DatabasePath.set -> void
+Firewall.Geo.MaxMind.MaxMindGeoOptions.MaxMindGeoOptions() -> void
+Firewall.Geo.MaxMind.MaxMindGeoProvider
+Firewall.Geo.MaxMind.MaxMindGeoProvider.Dispose() -> void
+Firewall.Geo.MaxMind.MaxMindGeoProvider.GetCountryCodeAsync(System.Net.IPAddress! address, System.Threading.CancellationToken cancellationToken) -> System.Threading.Tasks.ValueTask<string?>
+Firewall.Geo.MaxMind.MaxMindGeoProvider.MaxMindGeoProvider(Microsoft.Extensions.Options.IOptions<Firewall.Geo.MaxMind.MaxMindGeoOptions!>! options) -> void
+Firewall.Geo.MaxMind.MaxMindGeoProvider.Name.get -> string!
+const Firewall.Geo.MaxMind.MaxMindGeoOptions.SectionName = "Firewall:Geo:MaxMind" -> string!
+static Firewall.Geo.MaxMind.MaxMindBuilderExtensions.AddMaxMindGeo(this Firewall.DependencyInjection.IFirewallBuilder! builder, System.Action<Firewall.Geo.MaxMind.MaxMindGeoOptions!>! configure) -> Firewall.DependencyInjection.IFirewallBuilder!

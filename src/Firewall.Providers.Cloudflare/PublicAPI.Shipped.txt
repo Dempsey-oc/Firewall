@@ -1,0 +1,23 @@
+#nullable enable
+Firewall.Providers.Cloudflare.CloudflareBuilderExtensions
+Firewall.Providers.Cloudflare.CloudflareIpRangeProvider
+Firewall.Providers.Cloudflare.CloudflareIpRangeProvider.CloudflareIpRangeProvider(System.Net.Http.IHttpClientFactory! clients, Microsoft.Extensions.Options.IOptionsMonitor<Firewall.Providers.Cloudflare.CloudflareOptions!>! options, Firewall.Diagnostics.IFirewallTelemetry! telemetry, Microsoft.Extensions.Logging.ILogger<Firewall.Providers.Cloudflare.CloudflareIpRangeProvider!>! logger) -> void
+Firewall.Providers.Cloudflare.CloudflareIpRangeProvider.Current.get -> Firewall.Providers.IpRangeSnapshot!
+Firewall.Providers.Cloudflare.CloudflareIpRangeProvider.Dispose() -> void
+Firewall.Providers.Cloudflare.CloudflareIpRangeProvider.Name.get -> string!
+Firewall.Providers.Cloudflare.CloudflareIpRangeProvider.RefreshAsync(System.Threading.CancellationToken cancellationToken) -> System.Threading.Tasks.ValueTask
+Firewall.Providers.Cloudflare.CloudflareIpRangeProvider.WatchToken.get -> Microsoft.Extensions.Primitives.IChangeToken!
+Firewall.Providers.Cloudflare.CloudflareOptions
+Firewall.Providers.Cloudflare.CloudflareOptions.BlockOnStartup.get -> bool
+Firewall.Providers.Cloudflare.CloudflareOptions.BlockOnStartup.set -> void
+Firewall.Providers.Cloudflare.CloudflareOptions.CloudflareOptions() -> void
+Firewall.Providers.Cloudflare.CloudflareOptions.IPv4Url.get -> string!
+Firewall.Providers.Cloudflare.CloudflareOptions.IPv4Url.set -> void
+Firewall.Providers.Cloudflare.CloudflareOptions.IPv6Url.get -> string!
+Firewall.Providers.Cloudflare.CloudflareOptions.IPv6Url.set -> void
+Firewall.Providers.Cloudflare.CloudflareOptions.RefreshInterval.get -> System.TimeSpan
+Firewall.Providers.Cloudflare.CloudflareOptions.RefreshInterval.set -> void
+Firewall.Providers.Cloudflare.CloudflareRefreshService
+Firewall.Providers.Cloudflare.CloudflareRefreshService.CloudflareRefreshService(Firewall.Providers.Cloudflare.CloudflareIpRangeProvider! provider, Microsoft.Extensions.Options.IOptionsMonitor<Firewall.Providers.Cloudflare.CloudflareOptions!>! options, Microsoft.Extensions.Logging.ILogger<Firewall.Providers.Cloudflare.CloudflareRefreshService!>! logger) -> void
+const Firewall.Providers.Cloudflare.CloudflareOptions.SectionName = "Firewall:Cloudflare" -> string!
+static Firewall.Providers.Cloudflare.CloudflareBuilderExtensions.AddCloudflareProvider(this Firewall.DependencyInjection.IFirewallBuilder! builder, System.Action<Firewall.Providers.Cloudflare.CloudflareOptions!>? configure = null) -> Firewall.DependencyInjection.IFirewallBuilder!

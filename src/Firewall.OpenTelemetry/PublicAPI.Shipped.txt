@@ -1,0 +1,12 @@
+#nullable enable
+Firewall.OpenTelemetry.FirewallTelemetry
+Firewall.OpenTelemetry.FirewallTelemetry.FirewallTelemetry() -> void
+Firewall.OpenTelemetry.FirewallTelemetry.RecordDecision(string! ruleName, Firewall.RuleDecision decision, double elapsedMilliseconds) -> void
+Firewall.OpenTelemetry.FirewallTelemetry.RecordProviderRefresh(string! providerName, bool succeeded, double elapsedMilliseconds) -> void
+Firewall.OpenTelemetry.FirewallTelemetry.StartEvaluationActivity(string! ruleName) -> System.Diagnostics.Activity?
+Firewall.OpenTelemetry.OpenTelemetryBuilderExtensions
+const Firewall.OpenTelemetry.FirewallTelemetry.ActivitySourceName = "Firewall" -> string!
+const Firewall.OpenTelemetry.FirewallTelemetry.MeterName = "Firewall" -> string!
+static Firewall.OpenTelemetry.OpenTelemetryBuilderExtensions.AddOpenTelemetry(this Firewall.DependencyInjection.IFirewallBuilder! builder) -> Firewall.DependencyInjection.IFirewallBuilder!
+static readonly Firewall.OpenTelemetry.FirewallTelemetry.Activity -> System.Diagnostics.ActivitySource!
+static readonly Firewall.OpenTelemetry.FirewallTelemetry.Meter -> System.Diagnostics.Metrics.Meter!

@@ -1,0 +1,15 @@
+#nullable enable
+Firewall.DependencyInjection.FirewallServiceCollectionExtensions
+Firewall.DependencyInjection.IFirewallBuilder
+Firewall.DependencyInjection.IFirewallBuilder.Services.get -> Microsoft.Extensions.DependencyInjection.IServiceCollection!
+Firewall.FirewallApplicationBuilderExtensions
+Firewall.Middleware.FirewallMiddleware
+Firewall.Middleware.FirewallMiddleware.FirewallMiddleware(Microsoft.AspNetCore.Http.RequestDelegate! next, Firewall.Pipeline.FirewallPipeline! pipeline, Microsoft.Extensions.Options.IOptionsMonitor<Firewall.FirewallOptions!>! options, Microsoft.Extensions.Logging.ILogger<Firewall.Middleware.FirewallMiddleware!>! logger) -> void
+Firewall.Middleware.FirewallMiddleware.InvokeAsync(Microsoft.AspNetCore.Http.HttpContext! context) -> System.Threading.Tasks.Task!
+Firewall.Pipeline.FirewallPipelineFactory
+Firewall.Pipeline.FirewallPipelineFactory.Build() -> Firewall.Pipeline.FirewallPipeline!
+Firewall.Pipeline.FirewallPipelineFactory.FirewallPipelineFactory(Firewall.Configuration.FirewallOptionsBinder! binder, Firewall.Diagnostics.IFirewallTelemetry! telemetry) -> void
+static Firewall.DependencyInjection.FirewallServiceCollectionExtensions.AddFirewall(this Microsoft.Extensions.DependencyInjection.IServiceCollection! services) -> Firewall.DependencyInjection.IFirewallBuilder!
+static Firewall.DependencyInjection.FirewallServiceCollectionExtensions.BindConfiguration(this Firewall.DependencyInjection.IFirewallBuilder! builder, Microsoft.Extensions.Configuration.IConfiguration! configuration, string! sectionName = "Firewall") -> Firewall.DependencyInjection.IFirewallBuilder!
+static Firewall.DependencyInjection.FirewallServiceCollectionExtensions.Configure(this Firewall.DependencyInjection.IFirewallBuilder! builder, System.Action<Firewall.FirewallOptions!>! configure) -> Firewall.DependencyInjection.IFirewallBuilder!
+static Firewall.FirewallApplicationBuilderExtensions.UseFirewall(this Microsoft.AspNetCore.Builder.IApplicationBuilder! app) -> Microsoft.AspNetCore.Builder.IApplicationBuilder!

@@ -1,0 +1,6 @@
+#nullable enable
+Firewall.Yarp.FirewallTransform
+Firewall.Yarp.FirewallTransform.FirewallTransform(Firewall.Pipeline.FirewallPipeline! pipeline, Microsoft.Extensions.Options.IOptionsMonitor<Firewall.FirewallOptions!>! options) -> void
+Firewall.Yarp.YarpBuilderExtensions
+override Firewall.Yarp.FirewallTransform.ApplyAsync(Yarp.ReverseProxy.Transforms.RequestTransformContext! context) -> System.Threading.Tasks.ValueTask
+static Firewall.Yarp.YarpBuilderExtensions.AddYarpIntegration(this Firewall.DependencyInjection.IFirewallBuilder! builder) -> Firewall.DependencyInjection.IFirewallBuilder!

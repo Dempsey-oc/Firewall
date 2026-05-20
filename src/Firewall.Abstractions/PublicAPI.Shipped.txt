@@ -1,1 +1,144 @@
 #nullable enable
+const Firewall.FirewallOptions.SectionName = "Firewall" -> string!
+Firewall.BlockResponseOptions
+Firewall.BlockResponseOptions.BlockResponseOptions() -> void
+Firewall.BlockResponseOptions.Body.get -> string!
+Firewall.BlockResponseOptions.Body.set -> void
+Firewall.BlockResponseOptions.ContentType.get -> string!
+Firewall.BlockResponseOptions.ContentType.set -> void
+Firewall.BlockResponseOptions.RetryAfterSeconds.get -> int?
+Firewall.BlockResponseOptions.RetryAfterSeconds.set -> void
+Firewall.BlockResponseOptions.StatusCode.get -> int
+Firewall.BlockResponseOptions.StatusCode.set -> void
+Firewall.Diagnostics.IFirewallTelemetry
+Firewall.Diagnostics.IFirewallTelemetry.RecordDecision(string! ruleName, Firewall.RuleDecision decision, double elapsedMilliseconds) -> void
+Firewall.Diagnostics.IFirewallTelemetry.RecordProviderRefresh(string! providerName, bool succeeded, double elapsedMilliseconds) -> void
+Firewall.Diagnostics.IFirewallTelemetry.StartEvaluationActivity(string! ruleName) -> System.Diagnostics.Activity?
+Firewall.Diagnostics.NoOpFirewallTelemetry
+Firewall.Diagnostics.NoOpFirewallTelemetry.RecordDecision(string! ruleName, Firewall.RuleDecision decision, double elapsedMilliseconds) -> void
+Firewall.Diagnostics.NoOpFirewallTelemetry.RecordProviderRefresh(string! providerName, bool succeeded, double elapsedMilliseconds) -> void
+Firewall.Diagnostics.NoOpFirewallTelemetry.StartEvaluationActivity(string! ruleName) -> System.Diagnostics.Activity?
+Firewall.FirewallContext
+Firewall.FirewallContext.CountryCode.get -> string?
+Firewall.FirewallContext.Equals(Firewall.FirewallContext other) -> bool
+Firewall.FirewallContext.FirewallContext() -> void
+Firewall.FirewallContext.FirewallContext(System.Net.IPAddress! remoteIp, string? forwardedFor, string? countryCode, string! scheme, string! method, Microsoft.AspNetCore.Http.PathString path, Microsoft.AspNetCore.Http.IHeaderDictionary! headers, System.IServiceProvider! services, object? transport = null) -> void
+Firewall.FirewallContext.ForwardedFor.get -> string?
+Firewall.FirewallContext.Headers.get -> Microsoft.AspNetCore.Http.IHeaderDictionary!
+Firewall.FirewallContext.Method.get -> string!
+Firewall.FirewallContext.Path.get -> Microsoft.AspNetCore.Http.PathString
+Firewall.FirewallContext.RemoteIp.get -> System.Net.IPAddress!
+Firewall.FirewallContext.Scheme.get -> string!
+Firewall.FirewallContext.Services.get -> System.IServiceProvider!
+Firewall.FirewallContext.Transport.get -> object?
+Firewall.FirewallContext.WithCountry(string? countryCode) -> Firewall.FirewallContext
+Firewall.FirewallOptions
+Firewall.FirewallOptions.Enabled.get -> bool
+Firewall.FirewallOptions.Enabled.set -> void
+Firewall.FirewallOptions.EvaluationTimeout.get -> System.TimeSpan
+Firewall.FirewallOptions.EvaluationTimeout.set -> void
+Firewall.FirewallOptions.FirewallOptions() -> void
+Firewall.FirewallOptions.HashIpsInTelemetry.get -> bool
+Firewall.FirewallOptions.HashIpsInTelemetry.set -> void
+Firewall.FirewallOptions.OnDeny.get -> Firewall.BlockResponseOptions!
+Firewall.FirewallOptions.OnDeny.set -> void
+Firewall.FirewallOptions.OnProviderFailure.get -> Firewall.ProviderFailurePolicy
+Firewall.FirewallOptions.OnProviderFailure.set -> void
+Firewall.FirewallOptions.ProviderRefreshInterval.get -> System.TimeSpan
+Firewall.FirewallOptions.ProviderRefreshInterval.set -> void
+Firewall.FirewallOptions.Rules.get -> Firewall.RuleSetOptions!
+Firewall.FirewallOptions.Rules.set -> void
+Firewall.FirewallOptions.TrustedProxies.get -> Firewall.TrustedProxyOptions!
+Firewall.FirewallOptions.TrustedProxies.set -> void
+Firewall.FirewallRuleExtensions
+Firewall.IFirewallRule
+Firewall.IFirewallRule.EvaluateAsync(Firewall.FirewallContext context, System.Threading.CancellationToken cancellationToken) -> System.Threading.Tasks.ValueTask<Firewall.RuleEvaluation>
+Firewall.IFirewallRule.Name.get -> string!
+Firewall.IFirewallRule.Order.get -> int
+Firewall.Providers.IGeoProvider
+Firewall.Providers.IGeoProvider.GetCountryCodeAsync(System.Net.IPAddress! address, System.Threading.CancellationToken cancellationToken) -> System.Threading.Tasks.ValueTask<string?>
+Firewall.Providers.IGeoProvider.Name.get -> string!
+Firewall.Providers.IIpRangeProvider
+Firewall.Providers.IIpRangeProvider.Current.get -> Firewall.Providers.IpRangeSnapshot!
+Firewall.Providers.IIpRangeProvider.Name.get -> string!
+Firewall.Providers.IIpRangeProvider.RefreshAsync(System.Threading.CancellationToken cancellationToken) -> System.Threading.Tasks.ValueTask
+Firewall.Providers.IIpRangeProvider.WatchToken.get -> Microsoft.Extensions.Primitives.IChangeToken!
+Firewall.Providers.IpRangeSnapshot
+Firewall.Providers.IpRangeSnapshot.Cidrs.get -> System.Collections.Generic.IReadOnlyList<string!>!
+Firewall.Providers.IpRangeSnapshot.Etag.get -> string?
+Firewall.Providers.IpRangeSnapshot.FetchedAtUtc.get -> System.DateTimeOffset
+Firewall.Providers.IpRangeSnapshot.IPAddresses.get -> System.Collections.Generic.IReadOnlyList<System.Net.IPAddress!>!
+Firewall.Providers.IpRangeSnapshot.IpRangeSnapshot(System.Collections.Generic.IReadOnlyList<System.Net.IPAddress!>! ipAddresses, System.Collections.Generic.IReadOnlyList<string!>! cidrs, System.DateTimeOffset fetchedAtUtc, string? etag) -> void
+Firewall.ProviderFailurePolicy
+Firewall.ProviderFailurePolicy.FailClosed = 0 -> Firewall.ProviderFailurePolicy
+Firewall.ProviderFailurePolicy.FailOpen = 1 -> Firewall.ProviderFailurePolicy
+Firewall.ProviderFailurePolicy.UseLastKnownGood = 2 -> Firewall.ProviderFailurePolicy
+Firewall.RuleDecision
+Firewall.RuleDecision.Allow = 1 -> Firewall.RuleDecision
+Firewall.RuleDecision.Continue = 0 -> Firewall.RuleDecision
+Firewall.RuleDecision.Deny = 2 -> Firewall.RuleDecision
+Firewall.RuleEvaluation
+Firewall.RuleEvaluation.Decision.get -> Firewall.RuleDecision
+Firewall.RuleEvaluation.Decision.init -> void
+Firewall.RuleEvaluation.Equals(Firewall.RuleEvaluation other) -> bool
+Firewall.RuleEvaluation.Reason.get -> string?
+Firewall.RuleEvaluation.Reason.init -> void
+Firewall.RuleEvaluation.RuleEvaluation() -> void
+Firewall.RuleEvaluation.Tags.get -> System.Collections.Immutable.ImmutableArray<System.Collections.Generic.KeyValuePair<string!, object?>>
+Firewall.RuleEvaluation.Tags.init -> void
+Firewall.RuleEvaluation.WithTag(string! key, object? value) -> Firewall.RuleEvaluation
+Firewall.RuleSetOptions
+Firewall.RuleSetOptions.AllowedCidrs.get -> System.Collections.Generic.IList<string!>!
+Firewall.RuleSetOptions.AllowedCidrs.set -> void
+Firewall.RuleSetOptions.AllowedCountries.get -> System.Collections.Generic.IList<string!>!
+Firewall.RuleSetOptions.AllowedCountries.set -> void
+Firewall.RuleSetOptions.AllowedIps.get -> System.Collections.Generic.IList<string!>!
+Firewall.RuleSetOptions.AllowedIps.set -> void
+Firewall.RuleSetOptions.AllowLocalhost.get -> bool
+Firewall.RuleSetOptions.AllowLocalhost.set -> void
+Firewall.RuleSetOptions.DefaultDeny.get -> bool
+Firewall.RuleSetOptions.DefaultDeny.set -> void
+Firewall.RuleSetOptions.DeniedCidrs.get -> System.Collections.Generic.IList<string!>!
+Firewall.RuleSetOptions.DeniedCidrs.set -> void
+Firewall.RuleSetOptions.DeniedCountries.get -> System.Collections.Generic.IList<string!>!
+Firewall.RuleSetOptions.DeniedCountries.set -> void
+Firewall.RuleSetOptions.DeniedIps.get -> System.Collections.Generic.IList<string!>!
+Firewall.RuleSetOptions.DeniedIps.set -> void
+Firewall.RuleSetOptions.RuleSetOptions() -> void
+Firewall.TrustedProxyEntry
+Firewall.TrustedProxyEntry.Address.get -> System.Net.IPAddress?
+Firewall.TrustedProxyEntry.Address.init -> void
+Firewall.TrustedProxyEntry.<Clone>$() -> Firewall.TrustedProxyEntry!
+Firewall.TrustedProxyEntry.Cidr.get -> string?
+Firewall.TrustedProxyEntry.Cidr.init -> void
+Firewall.TrustedProxyEntry.Deconstruct(out System.Net.IPAddress? Address, out string? Cidr) -> void
+Firewall.TrustedProxyEntry.Equals(Firewall.TrustedProxyEntry? other) -> bool
+Firewall.TrustedProxyEntry.TrustedProxyEntry(System.Net.IPAddress? Address, string? Cidr) -> void
+Firewall.TrustedProxyOptions
+Firewall.TrustedProxyOptions.ForwardLimit.get -> int
+Firewall.TrustedProxyOptions.ForwardLimit.set -> void
+Firewall.TrustedProxyOptions.KnownNetworks.get -> System.Collections.Generic.IList<string!>!
+Firewall.TrustedProxyOptions.KnownNetworks.set -> void
+Firewall.TrustedProxyOptions.KnownProxies.get -> System.Collections.Generic.IList<string!>!
+Firewall.TrustedProxyOptions.KnownProxies.set -> void
+Firewall.TrustedProxyOptions.TrustedProxyOptions() -> void
+override Firewall.FirewallContext.Equals(object? obj) -> bool
+override Firewall.FirewallContext.GetHashCode() -> int
+override Firewall.RuleEvaluation.GetHashCode() -> int
+override Firewall.TrustedProxyEntry.Equals(object? obj) -> bool
+override Firewall.TrustedProxyEntry.GetHashCode() -> int
+override Firewall.TrustedProxyEntry.ToString() -> string!
+~override Firewall.RuleEvaluation.Equals(object obj) -> bool
+~override Firewall.RuleEvaluation.ToString() -> string
+static Firewall.FirewallContext.operator !=(Firewall.FirewallContext left, Firewall.FirewallContext right) -> bool
+static Firewall.FirewallContext.operator ==(Firewall.FirewallContext left, Firewall.FirewallContext right) -> bool
+static Firewall.FirewallRuleExtensions.IsAllowed(this Firewall.IFirewallRule! rule, Microsoft.AspNetCore.Http.HttpContext! context) -> bool
+static Firewall.Providers.IpRangeSnapshot.Empty.get -> Firewall.Providers.IpRangeSnapshot!
+static Firewall.RuleEvaluation.Allow(string? reason = null) -> Firewall.RuleEvaluation
+static Firewall.RuleEvaluation.Continue.get -> Firewall.RuleEvaluation
+static Firewall.RuleEvaluation.Deny(string? reason = null) -> Firewall.RuleEvaluation
+static Firewall.RuleEvaluation.operator !=(Firewall.RuleEvaluation left, Firewall.RuleEvaluation right) -> bool
+static Firewall.RuleEvaluation.operator ==(Firewall.RuleEvaluation left, Firewall.RuleEvaluation right) -> bool
+static Firewall.TrustedProxyEntry.operator !=(Firewall.TrustedProxyEntry? left, Firewall.TrustedProxyEntry? right) -> bool
+static Firewall.TrustedProxyEntry.operator ==(Firewall.TrustedProxyEntry? left, Firewall.TrustedProxyEntry? right) -> bool
+static Firewall.Diagnostics.NoOpFirewallTelemetry.Instance.get -> Firewall.Diagnostics.IFirewallTelemetry!
