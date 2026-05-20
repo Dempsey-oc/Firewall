@@ -80,6 +80,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Firewall.Caching.Hybrid.Tes
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Firewall.Yarp.Tests", "tests\Firewall.Yarp.Tests\Firewall.Yarp.Tests.csproj", "{A12C82C2-10AB-4344-AD05-E9BA12FAF2C4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Firewall.LegacyCompat.Tests", "tests\Firewall.LegacyCompat.Tests\Firewall.LegacyCompat.Tests.csproj", "{AE2FC2F9-F619-41B1-8EAD-AA82B43D340A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -330,6 +332,18 @@ Global
 		{A12C82C2-10AB-4344-AD05-E9BA12FAF2C4}.Release|x64.Build.0 = Release|Any CPU
 		{A12C82C2-10AB-4344-AD05-E9BA12FAF2C4}.Release|x86.ActiveCfg = Release|Any CPU
 		{A12C82C2-10AB-4344-AD05-E9BA12FAF2C4}.Release|x86.Build.0 = Release|Any CPU
+		{AE2FC2F9-F619-41B1-8EAD-AA82B43D340A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE2FC2F9-F619-41B1-8EAD-AA82B43D340A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE2FC2F9-F619-41B1-8EAD-AA82B43D340A}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{AE2FC2F9-F619-41B1-8EAD-AA82B43D340A}.Debug|x64.Build.0 = Debug|Any CPU
+		{AE2FC2F9-F619-41B1-8EAD-AA82B43D340A}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{AE2FC2F9-F619-41B1-8EAD-AA82B43D340A}.Debug|x86.Build.0 = Debug|Any CPU
+		{AE2FC2F9-F619-41B1-8EAD-AA82B43D340A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE2FC2F9-F619-41B1-8EAD-AA82B43D340A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE2FC2F9-F619-41B1-8EAD-AA82B43D340A}.Release|x64.ActiveCfg = Release|Any CPU
+		{AE2FC2F9-F619-41B1-8EAD-AA82B43D340A}.Release|x64.Build.0 = Release|Any CPU
+		{AE2FC2F9-F619-41B1-8EAD-AA82B43D340A}.Release|x86.ActiveCfg = Release|Any CPU
+		{AE2FC2F9-F619-41B1-8EAD-AA82B43D340A}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -355,5 +369,6 @@ Global
 		{81EA09B4-BD27-45B5-BEF5-9D732EC73EEE} = {47752935-1BAE-4F98-BE10-B0CD9BEAF86D}
 		{E2744793-9D55-4C29-8D53-F41D4996ED36} = {47752935-1BAE-4F98-BE10-B0CD9BEAF86D}
 		{A12C82C2-10AB-4344-AD05-E9BA12FAF2C4} = {47752935-1BAE-4F98-BE10-B0CD9BEAF86D}
+		{AE2FC2F9-F619-41B1-8EAD-AA82B43D340A} = {47752935-1BAE-4F98-BE10-B0CD9BEAF86D}
 	EndGlobalSection
 EndGlobal
