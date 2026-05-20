@@ -72,6 +72,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Firewall.Providers.Cloudfla
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Firewall.Geo.MaxMind.Tests", "tests\Firewall.Geo.MaxMind.Tests\Firewall.Geo.MaxMind.Tests.csproj", "{8B552F18-F386-4502-9067-70915347C4B4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Firewall.OpenTelemetry.Tests", "tests\Firewall.OpenTelemetry.Tests\Firewall.OpenTelemetry.Tests.csproj", "{9116805D-047C-4DBB-B839-6AC06AD84AF6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -274,6 +276,18 @@ Global
 		{8B552F18-F386-4502-9067-70915347C4B4}.Release|x64.Build.0 = Release|Any CPU
 		{8B552F18-F386-4502-9067-70915347C4B4}.Release|x86.ActiveCfg = Release|Any CPU
 		{8B552F18-F386-4502-9067-70915347C4B4}.Release|x86.Build.0 = Release|Any CPU
+		{9116805D-047C-4DBB-B839-6AC06AD84AF6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9116805D-047C-4DBB-B839-6AC06AD84AF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9116805D-047C-4DBB-B839-6AC06AD84AF6}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{9116805D-047C-4DBB-B839-6AC06AD84AF6}.Debug|x64.Build.0 = Debug|Any CPU
+		{9116805D-047C-4DBB-B839-6AC06AD84AF6}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{9116805D-047C-4DBB-B839-6AC06AD84AF6}.Debug|x86.Build.0 = Debug|Any CPU
+		{9116805D-047C-4DBB-B839-6AC06AD84AF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9116805D-047C-4DBB-B839-6AC06AD84AF6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9116805D-047C-4DBB-B839-6AC06AD84AF6}.Release|x64.ActiveCfg = Release|Any CPU
+		{9116805D-047C-4DBB-B839-6AC06AD84AF6}.Release|x64.Build.0 = Release|Any CPU
+		{9116805D-047C-4DBB-B839-6AC06AD84AF6}.Release|x86.ActiveCfg = Release|Any CPU
+		{9116805D-047C-4DBB-B839-6AC06AD84AF6}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -295,5 +309,6 @@ Global
 		{A8CB2FDD-67A3-42F8-986A-7AE87182DFA5} = {760AB15A-8938-8D9B-BEDE-5CE1484B84C3}
 		{DDAE4FF7-D4BA-414D-A7E9-D08FF40C5C09} = {47752935-1BAE-4F98-BE10-B0CD9BEAF86D}
 		{8B552F18-F386-4502-9067-70915347C4B4} = {47752935-1BAE-4F98-BE10-B0CD9BEAF86D}
+		{9116805D-047C-4DBB-B839-6AC06AD84AF6} = {47752935-1BAE-4F98-BE10-B0CD9BEAF86D}
 	EndGlobalSection
 EndGlobal
