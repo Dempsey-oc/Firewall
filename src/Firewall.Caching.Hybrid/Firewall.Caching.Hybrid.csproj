@@ -21,4 +21,8 @@
     <PackageReference Include="Microsoft.Extensions.Caching.Hybrid" />
   </ItemGroup>
 
+  <ItemGroup>
+    <InternalsVisibleTo Include="Firewall.Caching.Hybrid.Tests" />
+  </ItemGroup>
+
 </Project>
