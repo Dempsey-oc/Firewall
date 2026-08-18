@@ -59,11 +59,6 @@
     <PackageVersion Include="coverlet.msbuild" Version="6.0.2" />
     <PackageVersion Include="ReportGenerator" Version="5.3.11" />
     <PackageVersion Include="WireMock.Net" Version="1.9.0" />
-    <!-- Override the transitive Scriban.Signed that WireMock.Net pulls in.
-         Versions <= 6.2.0 carry GHSA-xcx6-vp38-8hr5 (high) and GHSA-xw6w-9jjh-p9cr
-         (moderate); NU1903/NU1902 restore warnings become errors under
-         TreatWarningsAsErrors=true. Pin to 6.2.1 (first patched release). -->
-    <PackageVersion Include="Scriban.Signed" Version="6.2.1" />
   </ItemGroup>
 
   <ItemGroup Label="Benchmarks">
