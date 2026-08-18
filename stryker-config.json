@@ -15,7 +15,7 @@
       "progress",
       "html",
       "json",
-      "cleartext-tree"
+      "cleartext"
     ],
     "mutate": [
       "!**/Internal/**/*.cs",
