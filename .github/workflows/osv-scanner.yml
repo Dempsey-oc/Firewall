@@ -38,18 +38,22 @@ jobs:
           dotnet-version: |
             10.0.x
 
-      - name: produce project.assets.json lockfiles
+      - name: produce packages.lock.json lockfiles
+        # Directory.Build.props sets RestorePackagesWithLockFile=true, so
+        # restore emits packages.lock.json alongside every csproj. osv-scanner
+        # then has real graphs to scan.
         run: dotnet restore Firewall.sln
 
-      # Correct ref: the OSV-Scanner action lives at the sub-path
-      # `osv-scanner-action` in the `google/osv-scanner-action` repo,
-      # tagged with the CLI version. --skip-git was removed in v2 (repo
-      # source scans no longer need it), so we don't pass it.
+      # osv-scanner action v2.2.3. --allow-no-lockfiles is belt-and-braces:
+        # even if a project ends up without a lockfile (e.g. sample apps we
+        # decide to exclude from restore later), the scan still succeeds
+        # against every project that DID emit one.
       - name: osv-scanner
         uses: google/osv-scanner-action/osv-scanner-action@v2.2.3
         with:
           scan-args: |-
             --recursive
+            --allow-no-lockfiles
             --format=sarif
             --output=osv.sarif
             ./

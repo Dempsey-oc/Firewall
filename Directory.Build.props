@@ -31,6 +31,14 @@
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
   </PropertyGroup>
 
+  <PropertyGroup Label="Restore">
+    <!-- Emit packages.lock.json next to each csproj. Osv-scanner reads
+         these; supply-chain scanners in general require pinned resolved
+         graphs. Locking per-project rather than per-solution matches
+         NuGet's model. -->
+    <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+  </PropertyGroup>
+
   <PropertyGroup Label="Package Defaults" Condition="'$(IsPackable)' != 'false'">
     <IsPackable>true</IsPackable>
     <PackageProjectUrl>https://github.com/dempsey-oc/firewall</PackageProjectUrl>
