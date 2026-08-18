@@ -43,13 +43,13 @@ jobs:
 
       # Correct ref: the OSV-Scanner action lives at the sub-path
       # `osv-scanner-action` in the `google/osv-scanner-action` repo,
-      # tagged with the CLI version (v2.2.3 as of writing).
+      # tagged with the CLI version. --skip-git was removed in v2 (repo
+      # source scans no longer need it), so we don't pass it.
       - name: osv-scanner
         uses: google/osv-scanner-action/osv-scanner-action@v2.2.3
         with:
           scan-args: |-
             --recursive
-            --skip-git
             --format=sarif
             --output=osv.sarif
             ./
