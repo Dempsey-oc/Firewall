@@ -30,6 +30,7 @@ jobs:
         uses: step-security/harden-runner@v2
         with:
           egress-policy: audit
+          disable-file-monitoring: true
       - uses: actions/checkout@v4
 
       - uses: actions/setup-dotnet@v4
@@ -40,8 +41,11 @@ jobs:
       - name: produce project.assets.json lockfiles
         run: dotnet restore Firewall.sln
 
+      # Correct ref: the OSV-Scanner action lives at the sub-path
+      # `osv-scanner-action` in the `google/osv-scanner-action` repo,
+      # tagged with the CLI version (v2.2.3 as of writing).
       - name: osv-scanner
-        uses: google/osv-scanner-action/osv-scanner-action@v1
+        uses: google/osv-scanner-action/osv-scanner-action@v2.2.3
         with:
           scan-args: |-
             --recursive

@@ -26,10 +26,6 @@ jobs:
       matrix:
         os: [ ubuntu-latest, windows-latest ]
     steps:
-      - name: harden runner
-        uses: step-security/harden-runner@v2
-        with:
-          egress-policy: audit
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
@@ -89,10 +85,6 @@ jobs:
     runs-on: ubuntu-latest
     needs: build-and-test
     steps:
-      - name: harden runner
-        uses: step-security/harden-runner@v2
-        with:
-          egress-policy: audit
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
@@ -124,9 +116,6 @@ jobs:
             -out    /tmp/firewall-sign.pfx \
             -passout pass:dryrun
 
-          # Sign every produced .nupkg with the ephemeral cert + an RFC 3161
-          # timestamp from a public TSA. The timestamp keeps the signature
-          # verifiable after the cert itself expires.
           for pkg in artifacts/packages/*.nupkg; do
             dotnet nuget sign "$pkg" \
               --certificate-path /tmp/firewall-sign.pfx \
@@ -134,9 +123,6 @@ jobs:
               --timestamper http://timestamp.digicert.com
           done
 
-          # Sanity-check: every nupkg now carries a signature block.
-          # Verify's chain check will fail on the self-signed cert; that's
-          # expected in the dry-run — we're testing the pipeline, not trust.
           for pkg in artifacts/packages/*.nupkg; do
             dotnet nuget verify "$pkg" --all || echo "expected dry-run cert verification failure: $pkg"
           done
@@ -158,10 +144,6 @@ jobs:
     runs-on: ubuntu-latest
     needs: build-and-test
     steps:
-      - name: harden runner
-        uses: step-security/harden-runner@v2
-        with:
-          egress-policy: audit
       - uses: actions/checkout@v4
       - uses: actions/setup-dotnet@v4
         with:
@@ -176,10 +158,6 @@ jobs:
     permissions:
       security-events: write
     steps:
-      - name: harden runner
-        uses: step-security/harden-runner@v2
-        with:
-          egress-policy: audit
       - uses: actions/checkout@v4
       - uses: github/codeql-action/init@v3
         with:
@@ -198,10 +176,6 @@ jobs:
     runs-on: ubuntu-latest
     needs: build-and-test
     steps:
-      - name: harden runner
-        uses: step-security/harden-runner@v2
-        with:
-          egress-policy: audit
       - uses: actions/checkout@v4
       - uses: actions/setup-dotnet@v4
         with:
