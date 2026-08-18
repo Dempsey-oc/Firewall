@@ -1,0 +1,30 @@
+{
+  "$schema": "https://raw.githubusercontent.com/stryker-mutator/stryker-net/master/docs/stryker-config.schema.json",
+  "stryker-config": {
+    "project": "src/Firewall.Core/Firewall.Core.csproj",
+    "test-projects": [
+      "tests/Firewall.Core.Tests/Firewall.Core.Tests.csproj"
+    ],
+    "language-version": "Latest",
+    "thresholds": {
+      "high": 85,
+      "low": 70,
+      "break": 70
+    },
+    "reporters": [
+      "progress",
+      "html",
+      "json",
+      "cleartext-tree"
+    ],
+    "mutate": [
+      "!**/Internal/**/*.cs",
+      "!**/obj/**",
+      "!**/bin/**"
+    ],
+    "concurrency": 4,
+    "ignore-mutations": [
+      "string"
+    ]
+  }
+}

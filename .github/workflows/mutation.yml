@@ -1,0 +1,58 @@
+name: mutation
+
+# Stryker.NET mutation testing on Firewall.Core.
+#
+# Mutation testing introduces small semantic changes ("mutants") into the
+# production code and checks whether at least one test fails — i.e. whether
+# the test suite would catch the regression. Line coverage tells you the
+# tests EXECUTE the code; mutation score tells you the tests ASSERT on it.
+#
+# Gated at >= 70%. Higher would be ideal but the suite is fresh and we want
+# a floor to ratchet, not a ceiling to hit.
+
+on:
+  schedule:
+    - cron: "0 5 * * *"
+  pull_request:
+    branches: [ master, main, dev ]
+    paths:
+      - 'src/Firewall.Core/**'
+      - 'src/Firewall.Abstractions/**'
+      - 'tests/Firewall.Core.Tests/**'
+      - 'stryker-config.json'
+      - '.github/workflows/mutation.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  stryker:
+    name: stryker (Firewall.Core)
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: |
+            10.0.x
+
+      - name: install stryker
+        run: dotnet tool install -g dotnet-stryker
+
+      - name: build
+        run: dotnet build src/Firewall.Core -c Release
+
+      - name: stryker
+        run: dotnet stryker --config-file stryker-config.json --output artifacts/stryker
+
+      - name: upload report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: stryker-report
+          path: artifacts/stryker/
