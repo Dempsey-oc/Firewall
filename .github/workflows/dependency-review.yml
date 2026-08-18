@@ -1,0 +1,35 @@
+name: dependency-review
+
+# Runs on every PR. Fails the PR if a newly introduced dependency:
+#   - has a known CVE rated moderate or higher;
+#   - has a non-allow-listed licence.
+# This is GitHub's built-in supply-chain check; complements OSV-Scanner
+# (which scans the full lock graph weekly) and CodeQL (which scans code).
+
+on:
+  pull_request:
+    branches: [ master, main, dev ]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  review:
+    name: review
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: dependency review
+        uses: actions/dependency-review-action@v4
+        with:
+          fail-on-severity: moderate
+          comment-summary-in-pr: on-failure
+          allow-licenses: >-
+            Apache-2.0, MIT, BSD-2-Clause, BSD-3-Clause, ISC,
+            CC0-1.0, CC-BY-3.0, CC-BY-4.0, Unlicense,
+            0BSD, BlueOak-1.0.0, Python-2.0, Zlib,
+            MS-PL, MS-EULA, MS-NETCF
