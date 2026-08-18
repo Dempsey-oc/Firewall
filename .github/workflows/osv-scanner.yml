@@ -1,0 +1,67 @@
+name: osv-scanner
+
+# Scans the resolved dependency graph against OSV.dev (the canonical
+# open-source vulnerability database). Runs weekly to catch CVEs disclosed
+# AFTER the dependency was merged, and on push to dev/master so a manual
+# version bump can't silently re-introduce a vulnerable transitive.
+#
+# Complements actions/dependency-review-action (PR-time, only diffs new
+# dependencies) and CodeQL (SAST, not dependency).
+
+on:
+  schedule:
+    - cron: "0 6 * * 1"
+  push:
+    branches: [ master, main, dev ]
+  pull_request:
+    branches: [ master, main, dev ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  security-events: write
+
+jobs:
+  scan:
+    name: scan
+    runs-on: ubuntu-latest
+    steps:
+      - name: harden runner
+        uses: step-security/harden-runner@v2
+        with:
+          egress-policy: audit
+          disable-file-monitoring: true
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: |
+            10.0.x
+
+      - name: produce packages.lock.json lockfiles
+        # Directory.Build.props sets RestorePackagesWithLockFile=true, so
+        # restore emits packages.lock.json alongside every csproj. osv-scanner
+        # then has real graphs to scan.
+        run: dotnet restore Firewall.sln
+
+      # osv-scanner action v2.2.3. --config points at the .osv-scanner.toml
+      # at the repo root (the action's Docker container doesn't auto-discover
+      # dotfiles at the scanned root). --allow-no-lockfiles is belt-and-braces
+      # in case a subset of projects doesn't emit a lockfile.
+      - name: osv-scanner
+        uses: google/osv-scanner-action/osv-scanner-action@v2.2.3
+        with:
+          scan-args: |-
+            --recursive
+            --allow-no-lockfiles
+            --config=./.osv-scanner.toml
+            --format=sarif
+            --output=osv.sarif
+            ./
+
+      - name: upload sarif
+        if: always()
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: osv.sarif
+          category: osv-scanner

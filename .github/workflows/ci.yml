@@ -97,6 +97,36 @@ jobs:
       - name: pack
         run: dotnet pack Firewall.sln -c Release -o artifacts/packages -p:ContinuousIntegrationBuild=true
 
+      - name: sign packages (self-signed dry-run)
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          # Generate an ephemeral self-signed cert for the dry-run. In Phase 16
+          # a production cert (e.g. from DigiCert or SignPath) replaces this
+          # block via repository secrets; the rest of the step is identical.
+          openssl req -x509 -newkey rsa:4096 -sha256 -days 1 -nodes \
+            -keyout /tmp/firewall-sign.key \
+            -out    /tmp/firewall-sign.crt \
+            -subj   "/CN=Firewall CI Dry-Run/O=Firewall contributors/C=GB"
+
+          openssl pkcs12 -export \
+            -inkey  /tmp/firewall-sign.key \
+            -in     /tmp/firewall-sign.crt \
+            -out    /tmp/firewall-sign.pfx \
+            -passout pass:dryrun
+
+          for pkg in artifacts/packages/*.nupkg; do
+            dotnet nuget sign "$pkg" \
+              --certificate-path /tmp/firewall-sign.pfx \
+              --certificate-password dryrun \
+              --timestamper http://timestamp.digicert.com
+          done
+
+          for pkg in artifacts/packages/*.nupkg; do
+            dotnet nuget verify "$pkg" --all || echo "expected dry-run cert verification failure: $pkg"
+          done
+
       - name: upload packages
         uses: actions/upload-artifact@v4
         with:

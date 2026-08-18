@@ -1,0 +1,86 @@
+name: reproducible-build
+
+# Builds the package twice from the same commit, on the same OS, with the
+# same SDK version and ContinuousIntegrationBuild=true, then byte-compares
+# every .nupkg's content. If the diff is non-empty, determinism is broken
+# and the build is not reproducible from a commit SHA.
+#
+# This is the dry-run version of SLSA L3's reproducibility requirement.
+# It's deliberately a separate workflow so a reproducibility regression
+# doesn't block functional PRs — the team triages it on its own cadence.
+
+on:
+  schedule:
+    - cron: "0 4 * * *"
+  push:
+    branches: [ master, main, dev ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  rebuild-and-compare:
+    name: build twice, compare contents
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: |
+            10.0.x
+
+      - name: build run 1
+        run: |
+          rm -rf artifacts/run1
+          dotnet pack Firewall.sln -c Release -o artifacts/run1 \
+            -p:ContinuousIntegrationBuild=true \
+            -p:Deterministic=true
+          ls -la artifacts/run1
+
+      - name: clean intermediates
+        run: |
+          find . -name bin -type d -prune -exec rm -rf {} +
+          find . -name obj -type d -prune -exec rm -rf {} +
+
+      - name: build run 2
+        run: |
+          rm -rf artifacts/run2
+          dotnet pack Firewall.sln -c Release -o artifacts/run2 \
+            -p:ContinuousIntegrationBuild=true \
+            -p:Deterministic=true
+          ls -la artifacts/run2
+
+      - name: compare nupkg contents
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p artifacts/extracted/{run1,run2}
+          fail=0
+          for pkg in artifacts/run1/*.nupkg; do
+            name=$(basename "$pkg")
+            unzip -q "$pkg" -d "artifacts/extracted/run1/${name%.nupkg}"
+            unzip -q "artifacts/run2/$name" -d "artifacts/extracted/run2/${name%.nupkg}"
+            if ! diff -r \
+                --exclude='.signature.p7s' \
+                --exclude='*.nuspec' \
+                "artifacts/extracted/run1/${name%.nupkg}" \
+                "artifacts/extracted/run2/${name%.nupkg}"; then
+              echo "FAIL: $name differs between runs"
+              fail=1
+            else
+              echo "OK:   $name reproducible"
+            fi
+          done
+          exit "$fail"
+
+      - name: upload diffs (if any)
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: reproducible-build-diffs
+          path: artifacts/extracted/
