@@ -1,0 +1,59 @@
+version: 2
+updates:
+  # GitHub Actions: weekly, grouped by action so we get one PR per upgrade.
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: "06:00"
+      timezone: Etc/UTC
+    open-pull-requests-limit: 5
+    labels:
+      - dependencies
+      - ci
+    commit-message:
+      prefix: ci
+      include: scope
+
+  # NuGet: weekly, grouped by area so PR noise stays manageable.
+  - package-ecosystem: nuget
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: "06:00"
+      timezone: Etc/UTC
+    open-pull-requests-limit: 10
+    labels:
+      - dependencies
+      - nuget
+    commit-message:
+      prefix: build
+      include: scope
+    groups:
+      microsoft-extensions:
+        patterns:
+          - "Microsoft.Extensions.*"
+      microsoft-aspnetcore:
+        patterns:
+          - "Microsoft.AspNetCore.*"
+      microsoft-net-test-sdk:
+        patterns:
+          - "Microsoft.NET.Test.Sdk"
+      xunit:
+        patterns:
+          - "xunit"
+          - "xunit.*"
+      fluent-assertions:
+        patterns:
+          - "FluentAssertions*"
+      coverlet:
+        patterns:
+          - "coverlet.*"
+      otel:
+        patterns:
+          - "OpenTelemetry*"
+      benchmark:
+        patterns:
+          - "BenchmarkDotNet*"
