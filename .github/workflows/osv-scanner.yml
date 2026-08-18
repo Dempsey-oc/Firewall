@@ -44,16 +44,17 @@ jobs:
         # then has real graphs to scan.
         run: dotnet restore Firewall.sln
 
-      # osv-scanner action v2.2.3. --allow-no-lockfiles is belt-and-braces:
-        # even if a project ends up without a lockfile (e.g. sample apps we
-        # decide to exclude from restore later), the scan still succeeds
-        # against every project that DID emit one.
+      # osv-scanner action v2.2.3. --config points at the .osv-scanner.toml
+      # at the repo root (the action's Docker container doesn't auto-discover
+      # dotfiles at the scanned root). --allow-no-lockfiles is belt-and-braces
+      # in case a subset of projects doesn't emit a lockfile.
       - name: osv-scanner
         uses: google/osv-scanner-action/osv-scanner-action@v2.2.3
         with:
           scan-args: |-
             --recursive
             --allow-no-lockfiles
+            --config=./.osv-scanner.toml
             --format=sarif
             --output=osv.sarif
             ./
