@@ -26,6 +26,10 @@ jobs:
     name: scan
     runs-on: ubuntu-latest
     steps:
+      - name: harden runner
+        uses: step-security/harden-runner@v2
+        with:
+          egress-policy: audit
       - uses: actions/checkout@v4
 
       - uses: actions/setup-dotnet@v4

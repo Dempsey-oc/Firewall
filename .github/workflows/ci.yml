@@ -26,6 +26,10 @@ jobs:
       matrix:
         os: [ ubuntu-latest, windows-latest ]
     steps:
+      - name: harden runner
+        uses: step-security/harden-runner@v2
+        with:
+          egress-policy: audit
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
@@ -85,6 +89,10 @@ jobs:
     runs-on: ubuntu-latest
     needs: build-and-test
     steps:
+      - name: harden runner
+        uses: step-security/harden-runner@v2
+        with:
+          egress-policy: audit
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
@@ -150,6 +158,10 @@ jobs:
     runs-on: ubuntu-latest
     needs: build-and-test
     steps:
+      - name: harden runner
+        uses: step-security/harden-runner@v2
+        with:
+          egress-policy: audit
       - uses: actions/checkout@v4
       - uses: actions/setup-dotnet@v4
         with:
@@ -164,6 +176,10 @@ jobs:
     permissions:
       security-events: write
     steps:
+      - name: harden runner
+        uses: step-security/harden-runner@v2
+        with:
+          egress-policy: audit
       - uses: actions/checkout@v4
       - uses: github/codeql-action/init@v3
         with:
@@ -182,6 +198,10 @@ jobs:
     runs-on: ubuntu-latest
     needs: build-and-test
     steps:
+      - name: harden runner
+        uses: step-security/harden-runner@v2
+        with:
+          egress-policy: audit
       - uses: actions/checkout@v4
       - uses: actions/setup-dotnet@v4
         with:

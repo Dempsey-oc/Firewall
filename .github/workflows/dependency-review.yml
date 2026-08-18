@@ -19,6 +19,10 @@ jobs:
     name: review
     runs-on: ubuntu-latest
     steps:
+      - name: harden runner
+        uses: step-security/harden-runner@v2
+        with:
+          egress-policy: audit
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
